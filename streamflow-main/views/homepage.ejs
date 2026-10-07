@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+	<link rel="icon" href="/images/logos.svg" type="image/svg+xml" sizes="64x64">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+    <title>Tayangin - Live Stream Nonstop</title>
+    <style>
+        /* ================= VARIABLES & RESET ================= */
+        :root {
+            --primary-color: #d4f134; 
+            --bg-color: #121212; 
+            --text-color: #f3f4f6; 
+            --text-gray: #a1a1aa; 
+            --border-color: #27272a;
+            --card-bg: #1e1e1e; 
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+			overflow-x:hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ================= TYPOGRAPHY & BUTTONS ================= */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-gray);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-dark {
+            background-color: #ffffff;
+            color: #111111;
+        }
+
+        .btn-dark:hover {
+            background-color: #e5e5e5;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-outline:hover {
+            border-color: #52525b;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #111111;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(0.9);
+        }
+
+        /* ================= LAYOUT UTILS ================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ================= NAVBAR ================= */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            z-index: 100;
+			border-bottom: none;
+			box-shadow: none;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+			position:relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+			z-index: 101;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+		
+		.nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-gray);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+		
+		.menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            z-index: 101; /* Pastikan tombol di atas menu mobile */
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+        .section-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-card {
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .step-image-placeholder {
+            background-color: var(--card-bg);
+            height: 200px;
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 0.875rem;
+        }
+
+        .step-content {
+            padding: 1.5rem;
+			background: var(--bg-color);
+			text-align: left;
+			padding-top: 2.5rem;
+        }
+
+        .step-number {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.875rem;
+            color: var(--text-gray);
+        }
+		
+		 /* ================= FITUR(PLATFORMS & CARDS) ================= */
+        .use-cases-grid-fitur {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .use-case-card-fitur {
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            background: var(--bg-color);
+			text-align: left;
+        }
+
+        .use-case-icon-fitur {
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+
+        /* ================= WHO IT'S FOR (PLATFORMS & CARDS) ================= */
+        .platforms-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .platform-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            background: var(--bg-color);
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .use-case-card {
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            background: var(--bg-color);
+			text-align: left;
+        }
+
+        .use-case-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ================= PRICING ================= */
+        .pricing-toggles {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+            font-size: 0.875rem;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pricing-card {
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(212, 241, 52, 0.15);
+        }
+
+        .plan-name {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .badge {
+            background: var(--primary-color);
+            color: var(--text-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .plan-desc {
+            font-size: 0.875rem;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            height: 40px;
+			text-align: left;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        .plan-features {
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .plan-features li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* ================= FAQ ================= */
+        .faq-section {
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .faq-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-question {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .faq-question span {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            margin-right: 1rem;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--text-gray);
+            font-size: 0.875rem;
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-col a {
+            font-size: 0.875rem;
+            color: var(--text-gray);
+        }
+
+        .footer-col a:hover {
+            color: var(--text-dark);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+		
+		.pricing-flex {
+			display: flex;
+    	    justify-content: center;
+    	    gap: 1.5rem;
+    	    margin-top: 2rem;
+		}
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 1024px) {
+            .steps-grid, .use-cases-grid, .use-cases-grid-fitur, .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .faq-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+                @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero-actions {
+                flex-direction: column;
+            }
+            
+            /* Responsive Navbar / Hamburger Menu */
+            .menu-toggle { 
+                display: block; 
+            }
+            
+            .nav-wrapper {
+                position: fixed;
+                top: 0;
+                left: -100%; /* Sembunyikan di luar layar */
+                width: 100%;
+                height: 100vh;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                transition: left 0.3s ease-in-out;
+                z-index: 100;
+            }
+
+            .nav-wrapper.active {
+                left: 0; /* Tampilkan menu saat aktif */
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                font-size: 1.25rem;
+                gap: 2rem;
+                width: 100%;
+            }
+
+            .nav-actions {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 2rem;
+            }
+
+            .nav-actions a, .nav-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Rest of Responsive Settings */
+            .steps-grid, .use-cases-grid, .use-cases-grid-fitur, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                place-items: start !important; /* Rapikan teks ke kiri di mobile */
+                text-align: left;
+            }
+            .hero { padding-top: 4rem; }
+	    .pricing-flex {
+        	flex-direction: column;
+    	    }
+        }
+		
+		@media (min-width: 769px) {
+    	    .nav-links {
+            	position: absolute;
+        	left: 50%;
+        	transform: translateX(-50%);
+     	    }
+		}
+		
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container navbar">
+			<div class="logo">
+                <img src="/images/logos2.svg" alt="tayangin logo" class="w-20 h-20">
+                tayangin
+            </div>
+            
+            <!-- Hamburger Icon (Tampil di Mobile) -->
+            <div class="menu-toggle" id="mobile-menu-btn">
+                <i class="ti ti-menu-2"></i>
+            </div>
+
+            <!-- Wrapper Menu Navigasi -->
+            <div class="nav-wrapper" id="nav-wrapper" >
+                <nav class="nav-links">
+                    <a href="#">Beranda</a>
+                    <a href="#fitur">Fitur</a>
+                    <a href="#harga">Harga</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="/login">Masuk</a>
+                    <a href="/signup" class="btn btn-dark">Daftar Gratis</a>
+                </div>
+			</div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero text-center">
+            <div class="container">
+                <h1>24/7 Live Stream <span id="platform-text" style="color: var(--primary-color); transition: opacity 0.4s ease-in-out;">YouTube</span><br>dari Rekaman Video Kamu</h1>
+                <p class="subtitle">Tayangkan Rekaman Video Kamu ke YouTube, Shopee, TikTok, Instagram, Facebook dan Semua Platform RTMP — Nonstop.</p>
+                <div class="hero-actions">
+                    <a href="/signup" class="btn btn-dark">Mulai Streaming →</a>
+                    <a href="#tutorial" class="btn btn-outline">Tutorial Singkat</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="text-center" id="tutorial">
+            <div class="container">
+                <span class="section-label">Tutorial Singkat</span>
+                <h2>Tiga Langkah Untuk Melakukan Live Stream 24/7</h2>
+                <p class="subtitle">Daftar, Upload, Tayang! Sisanya biar sistem kami yang handle.</p>
+
+                <div class="steps-grid text-left">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-image-placeholder">
+							<img alt="Pilih platform dan menaruh stream key di Tayangin" loading="lazy" decoding="async" data-nimg="fill" class="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105" src="/images/step-upload-edit.svg">
+						</div>
+                        <div class="step-content">
+                            <div class="step-number">01</div>
+                            <h3 class="step-title">Unggah rekaman video</h3>
+                            <p class="step-desc">Unggah rekaman video kamu dari komputer atau dari penyimpanan online milikmu - Googledrive, Mediafire, Mega.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-image-placeholder">
+							<img alt="Pilih platform dan menaruh stream key di Tayangin" loading="lazy" decoding="async" data-nimg="fill" class="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105" src="/images/step-key-edit.svg">
+						</div>
+                        <div class="step-content">
+                            <div class="step-number">02</div>
+                            <h3 class="step-title">Masukkan Stream Key Kamu</h3>
+                            <p class="step-desc">Pilih platform yang Kamu mau — YouTube, Facebook, Instagram atau Tiktok — dan input stream key kamu di dashboard.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-image-placeholder">
+							<img alt="Pilih platform dan menaruh stream key di Tayangin" loading="lazy" decoding="async" data-nimg="fill" class="object-cover transition-transform duration-500 motion-safe:group-hover:scale-105" src="/images/step-live-edit.svg">
+						</div>
+                        <div class="step-content">
+                            <div class="step-number">03</div>
+                            <h3 class="step-title">Live Streaming 24/7</h3>
+                            <p class="step-desc">Tekan tombol buat stream dan video kamu siap ditonton oleh jutaan orang di Internet tanpa perlu buka laptop lagi.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+		
+		<!-- FITUR -->
+        <section class="text-center" id="fitur" style="background-color: var(--bg-color);">
+            <div class="container">
+                <span class="section-label">Fitur Unggulan</span>
+                <h2>Semua yang kamu butuhkan untuk streaming 24/7 <br>sudah tersedia disini</h2>
+                <p class="subtitle">Tayangin hadir sebagai ekosistem lengkap untuk memaksimalkan potensi live streaming kamu tanpa membebani device yang kamu miliki.</p>
+
+                <div class="use-cases-grid-fitur text-left">
+                    <div class="use-case-card-fitur">
+                        <div class="use-case-icon-fitur">
+							<i class="ti ti-cloud-upload text-7xl"></i>
+		
+						</div>
+                        <h4>24/7 Cloud Streaming</h4>
+                        <p class="step-desc-fitur" style="margin-top: 0.5rem;">Tidak perlu takut tagihan listrik atau kuota membengkak. Server kami yang akan melakukan streaming nonstop untuk Kamu.</p>
+                    </div>
+                    <div class="use-case-card-fitur">
+                        <div class="use-case-icon-fitur">
+							<i class="ti ti-database text-2xl"></i>
+						</div>
+                        <h4>Smart File Upload</h4>
+                        <p class="step-desc-fitur" style="margin-top: 0.5rem;">Import video dari penyimpanan online kamu ke server kami dengan sekali klik. Menghemat waktu upload Kamu.</p>
+                    </div>
+                    <div class="use-case-card-fitur">
+                        <div class="use-case-icon-fitur"><i class="ti ti-stairs-up text-2xl"></i></div>
+                        <h4>Storage Tracking</h4>
+                        <p class="step-desc-fitur" style="margin-top: 0.5rem;">Sistem kami akan memberi tahu penggunaan penyimpanan yang sudah kamu lakukan selama streaming.</p>
+                    </div>
+                    <div class="use-case-card-fitur">
+                        <div class="use-case-icon-fitur"><i class="ti ti-repeat text-2xl"></i></div>
+                        <h4>Auto Looping</h4>
+                        <p class="step-desc-fitur" style="margin-top: 0.5rem;">File kamu yang berdurasi 1 jam bisa dimainkan selama 24 jam nonstop dengan fitur auto looping yang kami miliki.</p>
+                    </div>
+                    <div class="use-case-card-fitur">
+                        <div class="use-case-icon-fitur"><i class="ti ti-calendar-time text-2xl"></i></div>
+                        <h4>Auto Scheduling</h4>
+                        <p class="step-desc-fitur" style="margin-top: 0.5rem;">Kamu bisa melakukan penjadwalan pemutaran video tanpa perlu membuka dashboard lagi setelahnya.</p>
+                    </div>
+                    <div class="use-case-card-fitur">
+                        <div class="use-case-icon-fitur"><i class="ti ti-brand-youtube text-2xl"></i></div>
+                        <h4>Multi Platform</h4>
+                        <p class="step-desc-fitur" style="margin-top: 0.5rem;">Platform kami sudah mendukung streaming ke berbagai sosial media — Youtube, Facebook, TikTok dan platform Lain.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO IT'S FOR -->
+        <section class="text-center" style="background-color: var(--bg-color);">
+            <div class="container">
+                <span class="section-label">Paling Pas Buat Siapa Sih?</span>
+                <h2>Satu tools untuk tayangin <br>24/7 multi platform</h2>
+                <p class="subtitle">Konten apapun yang kamu buat, Tayangin siap melakukan live streaming nonstop untuk kamu di berbagai platform yang kamu punya. Upload sekali, bikin playlist, dan menikmati hidup sepenuhnya.</p>
+
+                <div class="platforms-cloud">
+                    <span class="platform-pill">▶ YouTube</span>
+                    <span class="platform-pill">🟣 Facebook</span>
+                    <span class="platform-pill">🟢 Shopee</span>
+                    <span class="platform-pill">🟩 Linkedin</span>
+                    <span class="platform-pill">🎵 TikTok</span>
+                    <span class="platform-pill">🔵 Instagram</span>
+                </div>
+
+                <div class="use-cases-grid text-left">
+                    <div class="use-case-card">
+                        <div class="use-case-icon"><i class="ti ti-music text-2xl"></i></div>
+                        <h4>Channel music 24/7 & lofi</h4>
+                        <p class="step-desc" style="margin-top: 0.5rem;">Putar ulang kontenmu di Youtube live stream tanpa henti agar para penikmat musik dan lofi tidak ketinggalan.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon"><i class="ti ti-device-gamepad-2"></i></div>
+                        <h4>Gamers & VOD</h4>
+                        <p class="step-desc" style="margin-top: 0.5rem;">Tayangkan momen terbaik kamu di sosial media 24/7. Buat channelmu hidup walaupun kamu sedang dalam keadaan offline.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon"><i class="ti ti-brand-apple-podcast"></i></div>
+                        <h4>Educators & podcasters</h4>
+                        <p class="step-desc" style="margin-top: 0.5rem;">Tayangkan file rekaman materi pembelajaran, rekaman video pelatihan dan podcast supaya memberikan pembahaman ke banyak orang.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon"><i class="ti ti-device-computer-camera"></i></div>
+                        <h4>Events, expos & digital screens</h4>
+                        <p class="step-desc" style="margin-top: 0.5rem;">Jadwalkan konten, pengumuman, atau visual yang cantik untuk berbagai macam acara dan lokasi secara nonstop.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon"><i class="ti ti-brand-vlc"></i></div>
+                        <h4>Brands & media channels</h4>
+                        <p class="step-desc" style="margin-top: 0.5rem;">Buat brand dan media yang kamu punya hidup 24/7 menggunakan fitur streaming ke multi platform — Youtube, Facebook, TikTok, dll.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon"><i class="ti ti-currency-dollar"></i></div>
+                        <h4>Seller & Affiliate</h4>
+                        <p class="step-desc" style="margin-top: 0.5rem;">Rekam konten jualan terbaikmu, kemudian putar ulang 24 jam nonstop di Shopee Live, TikTok dan biarkan keranjang kuningmu penuh.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section class="text-center" id="harga">
+            <div class="container">
+                <span class="section-label">Harga</span>
+                <h2>Pilih paket sesuai kebutuhan kamu</span></h2>
+                <p class="subtitle">Kami memiliki enam opsi paket untuk memenuhi kebutuhanmu.</p>
+
+				<div class="pricing-flex text-left" style="margin-bottom:3rem;">
+                    <div class="pricing-card">
+                        <div class="plan-name">Trial</div>
+                        <p class="plan-desc">Ideal untuk kamu yang mau nyobain.</p>
+                        <div class="plan-price">Gratis</div>
+                        <ul class="plan-features">
+                            <li><span>Active streams</span> <b>1</b></li>
+                            <li><span>Storage</span> <b>1 GB</b></li>
+							<li><span>Auto loop</span> <b>✓</b></li>
+							<li><span>Scheduling</span> <b>✓</b></li>
+                            <li><span>Durasi stream</span> <b>72 jam</b></li>
+							<li><span>Resolusi</span> <b>Up to 720p</b></li>
+							
+                        </ul>
+                        <a href="https://wa.me/6285171114452?text=Kak infonya paket trial tayangin" class="btn btn-outline" style="width: 100%;">Hubungi Admin</a>
+                    </div>
+					
+					<div class="pricing-card">
+                        <div class="plan-name">Tester</div>
+                        <p class="plan-desc">Untuk kamu yang lagi mendang mending.</p>
+                        <div class="plan-price">Rp 19.000<span>/bln</span></div>
+                        <ul class="plan-features">
+                            <li><span>Active streams</span> <b>1</b></li>
+                            <li><span>No watermark</span> <b>✓</b></li>
+                            <li><span>Storage</span> <b>1 GB</b></li>
+                            <li><span>Playlists</span> <b>Unlimited</b></li>
+							<li><span>Auto loop</span> <b>✓</b></li>
+							<li><span>Scheduling</span> <b>✓</b></li>
+                            <li><span>Durasi stream</span> <b>24/7</b></li>
+							<li><span>Resolusi</span> <b>Up to 720p</b></li>
+							
+                        </ul>
+                        <a href="/tester" class="btn btn-outline" style="width: 100%;">Pilih paket</a>
+                    </div>
+                </div>
+				
+                <div class="pricing-grid text-left">
+                    <!-- Starter Plan -->
+                    <div class="pricing-card">
+                        <div class="plan-name">Starter</div>
+                        <p class="plan-desc">Ideal untuk pemula yang baru merintis.</p>
+                        <div class="plan-price">Rp 30.000<span>/bln</span></div>
+                        <ul class="plan-features">
+                            <li><span>Active streams</span> <b>3</b></li>
+                            <li><span>No watermark</span> <b>✓</b></li>
+                            <li><span>Storage</span> <b>3 GB</b></li>
+                            <li><span>Playlists</span> <b>Unlimited</b></li>
+							<li><span>Auto loop</span> <b>✓</b></li>
+							<li><span>Scheduling</span> <b>✓</b></li>
+                            <li><span>Durasi stream</span> <b>24/7</b></li>
+							<li><span>Resolusi</span> <b>Up to 720p</b></li>
+							
+                        </ul>
+                        <a href="/starter" class="btn btn-outline" style="width: 100%;">Pilih paket</a>
+                    </div>
+
+                    <!-- Growth Plan -->
+                    <div class="pricing-card popular">
+                        <div class="plan-name">Premium <span class="badge" style="color:red">PALING LARIS</span></div>
+                        <p class="plan-desc">Untuk kreator menengah dengan beberapa channel.</p>
+                        <div class="plan-price">Rp 70.000<span>/bln</span></div>
+                        <ul class="plan-features">
+                            <li><span>Active streams</span> <b>6</b></li>
+                            <li><span>No watermark</span> <b>✓</b></li>
+                            <li><span>Multistream</span> <b>✓</b></li>
+                            <li><span>Storage</span> <b>10 GB</b></li>
+							<li><span>Playlists</span> <b>Unlimited</b></li>
+							<li><span>Auto loop</span> <b>✓</b></li>
+							<li><span>Scheduling</span> <b>✓</b></li>
+                            <li><span>Durasi stream</span> <b>24/7</b></li>
+							<li><span>Resolusi</span> <b>Up to 1080p</b></li>
+                        </ul>
+                        <a href="/premium" class="btn btn-primary" style="width: 100%;">Pilih paket</a>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="pricing-card">
+                        <div class="plan-name">Ultimate</div>
+                        <p class="plan-desc">Untuk ternak channel dan buka cabang toko.</p>
+                        <div class="plan-price">Rp 150.000<span>/bln</span></div>
+                        <ul class="plan-features">
+                            <li><span>Active streams</span> <b>10</b></li>
+                            <li><span>No watermark</span> <b>✓</b></li>
+                            <li><span>Multistream</span> <b>✓</b></li>
+                            <li><span>Storage</span> <b>15 GB</b></li>
+							<li><span>Playlists</span> <b>Unlimited</b></li>
+							<li><span>Auto loop</span> <b>✓</b></li>
+							<li><span>Scheduling</span> <b>✓</b></li>
+                            <li><span>Durasi stream</span> <b>24/7</b></li>
+							<li><span>Resolusi</span> <b>Up to 1080p</b></li>
+                        </ul>
+                        <a href="/ultimate" class="btn btn-outline" style="width: 100%;">Pilih paket</a>
+                    </div>
+                    
+                    <!-- Ultimate Plan -->
+                    <div class="pricing-card">
+                        <div class="plan-name">Elite </div>
+                        <p class="plan-desc">Untuk para agensi dan suhu live.</p>
+                        <div class="plan-price">Rp 250.000<span>/bln</span></div>
+                        <ul class="plan-features">
+                            <li><span>Active streams</span> <b>10</b></li>
+                            <li><span>No watermark</span> <b>✓</b></li>
+                            <li><span>Multistream</span> <b>✓</b></li>
+                            <li><span>Storage</span> <b>25 GB</b></li>
+							<li><span>Playlists</span> <b>Unlimited</b></li>
+							<li><span>Auto loop</span> <b>✓</b></li>
+							<li><span>Scheduling</span> <b>✓</b></li>
+                            <li><span>Durasi stream</span> <b>24/7</b></li>
+							<li><span>Resolusi</span> <b>Up to 1080p</b></li>
+                        </ul>
+                        <a href="/elite" class="btn btn-primary" style="width: 100%;">Pilih paket</a>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+		<!-- CTA -->
+		<section class="text-center" style="background-color: var(--bg-color);" id="contact">
+            <div class="container">
+                <span class="section-label">Tunggu apa lagi</span>
+                <h2>Tayangin live stream 24/7 kamu<br>dari rekaman video</h2>
+                <p class="subtitle">Upload video kamu, buat playlist, dan live streaming nonstop di Youtube, TikTok, Facebook, dll — tanpa OBS, tanpa server.</p>               
+            </div>
+			<div class="container">
+                <div class="">
+                    <a href="https://wa.me/6285171114452?text=Kak infonya paket trial tayangin" class="btn btn-dark">Coba Streaming Trial</a>
+                    <a href="https://wa.me/6285171114452" class="btn btn-outline">Hubungi Admin</a>
+                </div>
+            </div>
+        </section>
+		
+        <!-- FAQ SECTION -->
+        <section class="faq-section">
+            <div class="container faq-container">
+                <div>
+                    <span class="section-label">FAQ</span>
+                    <h2>tayangin menjawab</h2>
+                    <p class="step-desc">Semua hal yang perlu kamu tahu tentang streaming nonstop pakai rekaman video kamu menggunakan platform tayangin.</p>
+                </div>
+                
+                <div class="faq-accordion">
+                    <!-- FAQ Items -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <div><span>01</span> Bagaimana caranya live streaming Youtube 24/7 menggunakan rekaman video?</div>
+                            <div>+</div>
+                        </div>
+                        <div class="faq-answer"><p>Kamu cukup mengunggah video yang sudah direkam ke platform kami, menyusunnya ke dalam playlist, pilih YouTube sebagai tujuan tayang, masukkan stream key, lalu klik mulai. Selebihnya, kami yang akan menjalankan streaming 24/7 langsung dari server kami.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <div><span>02</span> Apakah aku perlu memakai OBS atau komputer masa kini untuk live streaming nonstop?</div>
+                            <div>+</div>
+                        </div>
+                        <div class="faq-answer"><p>Tidak perlu. Platform cloud kami sepenuhnya menggantikan software penyiaran lokal seperti OBS, sehingga komputer/PC kamu bisa bebas istirahat.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <div><span>03</span> Bisakah aku menayangkan ulang live streaming yang perna aku lakukan?</div>
+                            <div>+</div>
+                        </div>
+                        <div class="faq-answer"><p>Tentu bisa. Kamu dapat dengan mudah mengunduh konten lamamu dan mengunggahnya kembali ke platform kami untuk menciptakan siaran live tanpa henti.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <div><span>04</span> Apakah Youtube memperbolehkan live streaming 24/7 menggunakan file rekaman video?</div>
+                            <div>+</div>
+                        </div>
+                        <div class="faq-answer"><p>Bisa, asalkan kamu memiliki hak cipta atas konten tersebut dan selalu mematuhi Pedoman Komunitas (Community Guidelines) serta Persyaratan Layanan (Terms of Service) dari YouTube.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="place-items:center">
+                <div class="footer-col" >
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        tayangin
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--text-gray); margin-bottom: 2rem;">Platform masa kini untuk melakukan multi live streaming 24/7 - YouTube, TikTok, Shopee, Instagram, dan sosial media lain yang mendukung RTMP.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Paket Sarter</a></li>
+                        <li><a href="#">Paket Premium</a></li>
+						<li><a href="#">Paket Ultimate</a></li>
+                        <li><a href="#">Paket Elite</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Platforms</h4>
+                    <ul>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">Shopee</a></li>
+                        <li><a href="#">TikTok</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="/">Beranda</a></li>
+                        <li><a href="#fitur">fitur</a></li>
+                        <li><a href="#harga">harga</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+				
+				<div class="footer-col">
+                    <h4>Komunitas</h4>
+                    <ul>
+                        <li><a href="#">Group Telegram</a></li>
+                        <li><a href="#">Discord Server</a></li>
+                        <li><a href="#">Group Whatsapp</a></li>
+						<li><a href="#">Group Khusus</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>© 2026 tayangin - All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FOR ACCORDION -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+			
+			const platforms = ["YouTube", "Shopee", "TikTok", "Instagram", "Facebook"];
+			let currentIndex = 0;
+			const platformTextElement = document.getElementById('platform-text');
+
+			// Fungsi untuk mengganti teks
+			setInterval(() => {
+				// 1. Pudarkan teks (hilang)
+				platformTextElement.style.opacity = '0';
+				
+				// 2. Tunggu sebentar sampai teks benar-benar pudar, lalu ganti isinya
+				setTimeout(() => {
+					currentIndex = (currentIndex + 1) % platforms.length;
+					platformTextElement.textContent = platforms[currentIndex];
+					
+					// 3. Munculkan kembali teks yang baru
+					platformTextElement.style.opacity = '1';
+				}, 400); // 400ms adalah waktu tunggu efek pudar
+
+			}, 2500); // Teks akan berganti setiap 2,5 detik
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('div:last-child');
+                    
+                    // Close all other open answers
+                    document.querySelectorAll('.faq-answer').forEach(el => {
+                        if (el !== answer) {
+                            el.style.maxHeight = null;
+                            el.previousElementSibling.querySelector('div:last-child').innerText = '+';
+                        }
+                    });
+
+                    // Toggle current answer
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.innerText = '+';
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.innerText = '−';
+                    }
+                });
+            });
+		
+			const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const menuIcon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navWrapper.classList.toggle('active');
+                
+                // Toggle Icon Menu <-> Close (X)
+                if (navWrapper.classList.contains('active')) {
+                    menuIcon.classList.remove('ti-menu-2');
+                    menuIcon.classList.add('ti-x');
+                    document.body.style.overflowY = 'hidden'; // Kunci scroll halaman belakang
+                } else {
+                    menuIcon.classList.remove('ti-x');
+                    menuIcon.classList.add('ti-menu-2');
+                    document.body.style.overflowY = 'auto'; // Buka scroll halaman
+                }
+            });
+
+            // Otomatis menutup menu jika mengklik salah satu link (khusus anchor link)
+            const navLinks = navWrapper.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navWrapper.classList.remove('active');
+                    menuIcon.classList.remove('ti-x');
+                    menuIcon.classList.add('ti-menu-2');
+                    document.body.style.overflowY = 'auto';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

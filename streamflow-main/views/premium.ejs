@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Pemesanan</title>
+  <link rel="stylesheet" href="/css/formulir.css">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  
+  <!-- Font Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+ 
+</head>
+<body class="bg-brand-bg min-h-screen flex items-center justify-center p-4 antialiased text-white">
+
+  <div class="w-full max-w-[600px] bg-brand-card rounded-2xl shadow-2xl border border-brand-border overflow-hidden relative">
+   
+    <div class="absolute top-0 left-0 w-full h-48 bg-gradient-to-br from-[#6b152d] via-brand-card to-brand-card opacity-80 pointer-events-none"></div>
+    
+    <svg class="absolute top-0 right-0 opacity-20 text-[#e62448] pointer-events-none -mt-4 -mr-4" width="160" height="160" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="120" cy="30" r="40" stroke="currentColor" stroke-width="12"/>
+      <circle cx="120" cy="30" r="75" stroke="currentColor" stroke-width="12"/>
+      <circle cx="120" cy="30" r="110" stroke="currentColor" stroke-width="12"/>
+    </svg>
+
+    <div class="relative z-10 p-6 sm:p-8">
+      
+      <a href="/" class="inline-flex items-center gap-2 text-brand-accent text-sm font-medium hover:text-rose-400 transition-colors mb-6">
+        <i class="ti ti-arrow-left"></i> Kembali ke Beranda
+      </a>
+
+      <h1 class="text-3xl font-bold mb-2">Formulir Pesanan</h1>
+      <p class="text-gray-300 text-sm mb-8">Silakan lengkapi data di bawah untuk melanjutkan pembayaran.</p>
+
+      <div class="bg-[#1f2233] border border-brand-border rounded-xl p-5 mb-8 flex justify-between items-center shadow-inner">
+        <div>
+          <h3 class="font-bold text-lg" id="paket">Paket Premium</h3>
+          <div class="flex items-center gap-4 mt-1 text-brand-accent text-sm font-medium">
+            <span class="flex items-center gap-1.5"><i class="ti ti-video text-base"></i> 5</span>
+            <span class="flex items-center gap-1.5"><i class="ti ti-server text-base"></i> 5</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <p class="text-gray-400 text-xs mb-1">Total Tagihan:</p>
+          <p class="text-brand-accent text-2xl font-extrabold tracking-tight" id="harga">Rp 70.000</p>
+        </div>
+      </div>
+
+	  <form id="orderForm">
+        
+        <div class="mb-5">
+          <label class="block text-gray-200 text-sm font-medium mb-2">Nama Lengkap <span class="text-brand-accent">*</span></label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <i class="ti ti-user text-gray-500"></i>
+            </div>
+            <input type="text" id="nama" placeholder="Masukkan nama Anda" required
+              class="w-full bg-brand-input border border-brand-border text-white text-sm rounded-xl py-3.5 pl-11 pr-4 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none transition-all placeholder-gray-600">
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <label class="block text-gray-200 text-sm font-medium mb-2">No. WhatsApp <span class="text-brand-accent">*</span></label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <i class="ti ti-brand-whatsapp text-gray-500"></i>
+            </div>
+            <input type="tel" id="nomorhp" placeholder="Contoh: 08123456789" required
+              class="w-full bg-brand-input border border-brand-border text-white text-sm rounded-xl py-3.5 pl-11 pr-4 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none transition-all placeholder-gray-600">
+          </div>
+          <p class="text-gray-500 text-xs mt-2">Nomor ini digunakan untuk mengirim detail login & panduan.</p>
+        </div>
+
+        <div class="mb-8">
+          <label class="block text-gray-200 text-sm font-medium mb-2">Metode Pembayaran <span class="text-brand-accent">*</span></label>
+          <div class="relative">
+            <select 
+              class="w-full bg-brand-input border border-brand-border text-white text-sm rounded-xl py-3.5 pl-4 pr-10 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none transition-all appearance-none cursor-pointer" id="metode_pembayaran">
+              <option value="QRIS" disabled selected>QRIS</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+              <i class="ti ti-chevron-down text-gray-500"></i>
+            </div>
+          </div>
+        </div>
+		
+		<div id="qrisContainer" class="hidden flex-col items-center justify-center p-4 bg-dark-900 border border-gray-600 rounded-xl mt-4 transition-all" style="margin-bottom:2rem">
+          <p class="text-sm text-gray-400 mb-3 text-center">Silakan scan QRIS di bawah ini untuk melakukan pembayaran.</p>
+          <img src="/images/qris.svg" alt="QRIS tayangin" class="w-full max-w-[250px] rounded-lg shadow-md mb-2" style="background-color:white; margin-top:1rem;margin-bottom:0.5rem">
+          <p class="text-xs text-rose-400 text-center">Setelah scan, jangan lupa screenshot bukti transfernya ya!</p>
+        </div>
+		
+        <button type="submit" 
+          class="w-full bg-brand-accent hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl shadow-[0_0_20px_rgba(230,36,72,0.3)] transition-all flex justify-center items-center gap-2 text-base">
+          <i class="ti ti-brand-whatsapp text-xl"></i> Konfirmasi via WhatsApp
+        </button>
+      </form>
+
+      <div class="mt-6">
+        <p class="text-gray-500 text-xs flex items-start sm:items-center justify-center gap-2 text-center leading-relaxed">
+          <span>Pembayaran aman & diproses secara manual. Akun akan aktif maksimal 15 menit setelah konfirmasi transfer.</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+    <script>
+	  document.getElementById('orderForm').addEventListener('submit', (e) => {
+		  e.preventDefault();
+		  
+		  const paket = document.getElementById('paket').innerText;
+		  const harga = document.getElementById('harga').innerText;
+		  const nama = document.getElementById('nama').value;
+		  const nomorhp = document.getElementById('nomorhp').value;
+		  const metode_pembayaran = document.getElementById('metode_pembayaran').value;
+		  
+		  let message = `Halo Admin tayangin.com, saya sudah melakukan pembayaran:%0A%0A`;
+		  message += `*Paket:* ${paket}%0A`;
+		  message += `*Harga:* ${harga}/Bulan%0A`;
+		  message += `*Nama:* ${nama}%0A`;
+		  message += `*No WA:* ${nomorhp}%0A`;
+		  message += `*Metode Pembayaran:* ${metode_pembayaran}%0A%0A`;
+		  message += `Ini bukti transfer saya (mohon dilampirkan). Terima kasih!`;
+		  
+		  const nomor_admin = "6285171114452";
+		  const linkwa = `https://wa.me/${nomor_admin}?text=${message}`;
+		  
+		  window.open(linkwa, '_blank');
+	  });  
+  </script>
+
+</body>
+</html>
